@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+		<script src="../node_modules/mocha/mocha.js"></script>
+		<script src="../node_modules/requirejs/require.js"></script>
+	</head>
+	<body>
+		<div id="mocha"></div>
+		<script>mocha.ui('tdd');</script>
+
+		<script>
+			require(['amd-config'], function() {
+				require(['tests'], function() {
+					mocha.run();
+				});
+			});
+		</script>
+	</body>
+</html>
