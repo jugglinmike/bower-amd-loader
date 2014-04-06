@@ -35,17 +35,49 @@ define({
 		var parts = name.split('?');
 		var manager = managers[parts[0]];
 		var packageName = parts[1];
-		var packageDir = manager.dir;
+		var packagesDir = manager.dir;
 		var root;
-		console.log(packageName);
 
-		if (config && config.paths && config.paths[packageDir]) {
-			packageDir = config.paths[packageDir];
+		if (config && config.paths && config.paths[packagesDir]) {
+			packagesDir = config.paths[packagesDir];
 		}
 
-		root = packageDir + '/' + packageName;
+		root = packagesDir + '/' + packageName;
 		getJSON(root + '/' + manager.configFile, function(meta) {
-			req([root + '/' + meta.main], onload);
+			var path = root + '/' + meta.main;
+			var map;
+
+			// Make map config
+			//var map = config.map[name] = config.map[name + '_unnormalized2'] = {};
+			if (!config.map) {
+				config.map = {};
+			}
+
+			if (!config.map['*']) {
+				config.map['*'] = {};
+			}
+
+			// TODO: Namespace dynamically-created paths to the current module
+			// ID. (This doesn't work at the moment, for some reason.)
+			//map = config.map[name] = {};
+			map = config.map['*'];
+
+			if (meta.dependencies) {
+				Object.keys(meta.dependencies).forEach(function(key) {
+					map[key] = 'ext!' + parts[0] + '?' + key;
+				});
+			}
+
+			config.map['*'][name] = path;
+
+			req([name], function(val) {
+				// TODO: Do not rely on RequireJS internals.
+				var p = require.s.contexts._.registry[packageName];
+				if (p && p.factory) {
+					val = p.factory.call(null);
+				}
+				onload(val);
+			});
 		});
 	}
 });
