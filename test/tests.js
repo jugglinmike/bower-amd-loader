@@ -1,4 +1,5 @@
 suite('bower!!', function() {
+	'use strict';;
 
 	var testRequire = function() {
 		var context = require.config({
