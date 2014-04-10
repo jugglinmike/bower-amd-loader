@@ -43,6 +43,15 @@ suite('bower!!', function() {
 		);
 	});
 
+	test.skip('multiple invocations', function(done) {
+		var require = this.require;
+		require(['bower!when'], function() {
+			require(['bower!when'], function() {
+				done();
+			});
+		});
+	});
+
 	test('custom installation directory', function(done) {
 		this.configuration.paths.bower_components = 'custom-bower-dir';
 		this.require = createRequire(this.configuration);
