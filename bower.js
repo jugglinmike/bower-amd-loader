@@ -46,6 +46,9 @@ define({
 			module.id = module.id.slice(0, slashIdx);
 		}
 
+		// Reference the `paths` object in the AMD configuration (if available)
+		// to allow for user specification of a custom Bower installation
+		// directory.
 		if (config && config.paths && config.paths[packagesDir]) {
 			packagesDir = config.paths[packagesDir];
 		}
