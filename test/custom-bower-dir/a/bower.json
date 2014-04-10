@@ -1,0 +1,7 @@
+{
+  "name": "a",
+  "main": "not-a.js",
+  "dependencies": {
+    "b": "0.0.1"
+  }
+}

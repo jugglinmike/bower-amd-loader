@@ -1,15 +1,20 @@
 suite('bower!!', function() {
 	'use strict';;
 
+	// TODO: Re-implement to support AMD script loaders that do not support the
+	// `context` configuration option.
+	var createRequire = function(configuration) {
+		configuration.context = +(new Date());
+		return require.config(configuration);
+	};
+
 	setup(function() {
 		this.configuration = {
 			paths: {
-				bower: '../bower',
-				bower_components: 'package-dirs/bower_components',
-			},
-			context: Math.random()
+				bower: '../bower'
+			}
 		};
-		this.require = require.config(this.configuration);
+		this.require = createRequire(this.configuration);
 	});
 
 	test('complex dependencies', function(done) {
@@ -36,5 +41,16 @@ suite('bower!!', function() {
 				done();
 			}
 		);
+	});
+
+	test('custom installation directory', function(done) {
+		this.configuration.paths.bower_components = 'custom-bower-dir';
+		this.require = createRequire(this.configuration);
+		this.require(['bower!a'], function(A) {
+			assert.ok(A, 'Loads module');
+			assert.ok(A.B, 'Loads module dependencies');
+			assert.ok(A.B);
+			done();
+		});
 	});
 });
