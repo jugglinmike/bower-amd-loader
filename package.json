@@ -12,7 +12,8 @@
   "author": "Mike Pennisi",
   "license": "MIT-Expat",
   "devDependencies": {
-    "requirejs": "^2.1.11"
+    "requirejs": "^2.1.11",
+    "chai": "^1.9.1"
   },
   "dependencies": {
     "mocha": "^1.18.2"

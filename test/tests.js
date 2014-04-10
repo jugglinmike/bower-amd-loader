@@ -14,20 +14,27 @@ suite('bower!!', function() {
 
 	test('complex dependencies', function(done) {
 		testRequire(['bower!layoutmanager'], function(Layout) {
+			assert.isFunction(Layout);
 			done();
 		});
 	});
 
 	test('named modules', function(done) {
 		testRequire(['bower!jquery'], function($) {
+			assert.isFunction($);
 			done();
 		});
 	});
 
 	test('submodules', function(done) {
-		testRequire(['bower!when', 'bower!when/delay'], function(when, whenDelay) {
-			console.log(when === whenDelay);
-			done();
-		});
+		testRequire(
+			['bower!when', 'bower!when/delay'],
+			function(when, whenDelay) {
+				assert.isFunction(when);
+				assert.isFunction(whenDelay);
+				assert.notEqual(when, whenDelay);
+				done();
+			}
+		);
 	});
 });
