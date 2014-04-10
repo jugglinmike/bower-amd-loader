@@ -37,21 +37,22 @@ function addPackage(config, pkg) {
 define({
 	load: function(name, req, onload, config) {
 		var packagesDir = bower.dir;
-		var packageDir = name;
-		var slashIdx = packageDir.indexOf('/');
-		var root;
+		var module = {
+			id: name
+		};
+		var slashIdx = module.id.indexOf('/');
 
-		if (slashIdx > -1) {
-			packageDir = packageDir.slice(0, slashIdx);
+		if (slashIdx > 0) {
+			module.id = module.id.slice(0, slashIdx);
 		}
 
 		if (config && config.paths && config.paths[packagesDir]) {
 			packagesDir = config.paths[packagesDir];
 		}
 
-		root = packagesDir + '/' + packageDir;
+		module.root = packagesDir + '/' + module.id;
 
-		getJSON(root + '/' + bower.configFile, function(meta) {
+		getJSON(module.root + '/' + bower.configFile, function(meta) {
 			var main;
 
 			if (slashIdx > 0) {
@@ -62,7 +63,7 @@ define({
 
 			addPackage(config, {
 				name: name,
-				location: root,
+				location: module.root,
 				main: main
 			});
 
