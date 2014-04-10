@@ -75,7 +75,6 @@ define({
 				});
 			}
 
-			console.log(name);
 			req([name], onload);
 		});
 	}
