@@ -1,8 +1,8 @@
 {
-  "name": "require-external",
+  "name": "bower-amd-loader",
   "version": "0.0.1",
-  "description": "",
-  "main": "ext.js",
+  "description": "An AMD plugin for loading JavaScript modules installed via Bower",
+  "main": "bower.js",
   "directories": {
     "test": "test"
   },
@@ -12,10 +12,8 @@
   "author": "Mike Pennisi",
   "license": "MIT-Expat",
   "devDependencies": {
+    "mocha": "^1.18.2",
     "requirejs": "^2.1.11",
     "chai": "^1.9.1"
-  },
-  "dependencies": {
-    "mocha": "^1.18.2"
   }
 }
