@@ -10,7 +10,7 @@ var getJSON = function(url, done) {
 		}
 	};
 
-	xhr.open("GET", url, true);
+	xhr.open('GET', url, true);
 	xhr.send(null);
 };
 
