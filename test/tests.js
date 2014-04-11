@@ -1,5 +1,5 @@
 suite('bower!!', function() {
-	'use strict';;
+	'use strict';
 
 	// TODO: Re-implement to support AMD script loaders that do not support the
 	// `context` configuration option.

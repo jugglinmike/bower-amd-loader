@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha-phantomjs --path ./node_modules/phantomjs/bin/phantomjs test/index.html"
+    "test": "npm run test-unit && npm run jshint",
+    "test-unit": "mocha-phantomjs --path ./node_modules/phantomjs/bin/phantomjs test/index.html",
+    "jshint": "jshint bower.js test/tests.js"
   },
   "author": "Mike Pennisi",
   "license": "MIT-Expat",
@@ -16,6 +18,7 @@
     "requirejs": "^2.1.11",
     "chai": "^1.9.1",
     "mocha-phantomjs": "^3.3.2",
-    "phantomjs": "^1.9.7-3"
+    "phantomjs": "^1.9.7-3",
+    "jshint": "^2.5.0"
   }
 }
