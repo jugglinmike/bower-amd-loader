@@ -16,6 +16,7 @@
 		<script>
 			require(['amd-config'], function() {
 				require(['tests'], function() {
+					var mocha = window.mochaPhantomJS || window.mocha;
 					mocha.run();
 				});
 			});

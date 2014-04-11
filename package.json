@@ -7,13 +7,15 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha-phantomjs --path ./node_modules/phantomjs/bin/phantomjs test/index.html"
   },
   "author": "Mike Pennisi",
   "license": "MIT-Expat",
   "devDependencies": {
     "mocha": "^1.18.2",
     "requirejs": "^2.1.11",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "mocha-phantomjs": "^3.3.2",
+    "phantomjs": "^1.9.7-3"
   }
 }
