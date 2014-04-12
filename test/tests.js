@@ -62,6 +62,16 @@ suite('bower!!', function() {
 		});
 	});
 
+	test('malformed bower.json files', function(done) {
+		this.require = createRequire(this.configuration);
+		this.require(['bower!bad-config'], function() {
+			done(new Error('Incorrectly invoked success callback'));
+		}, function(err) {
+			assert.instanceOf(err, Error);
+			done();
+		});
+	});
+
 	test('custom installation directory', function(done) {
 		this.configuration.paths.bower_components = 'custom-bower-dir';
 		this.require = createRequire(this.configuration);

@@ -5,7 +5,7 @@ var getJSON = function(url, done) {
 	var xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function() {
-		var status, error;
+		var status, error, parsed;
 
 		if (xhr.readyState === 4) {
 
@@ -18,7 +18,15 @@ var getJSON = function(url, done) {
 
 				return;
 			}
-			done(null, JSON.parse(xhr.responseText));
+
+			try {
+				parsed = JSON.parse(xhr.responseText);
+			} catch(err) {
+				done(err);
+				return;
+			}
+
+			done(null, parsed);
 		}
 	};
 
