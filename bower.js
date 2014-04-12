@@ -5,8 +5,20 @@ var getJSON = function(url, done) {
 	var xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function() {
+		var status, error;
+
 		if (xhr.readyState === 4) {
-			done(JSON.parse(xhr.responseText));
+
+			status = xhr.status;
+			if (status > 399 && status < 600) {
+				// An http 4xx or 5xx error. Signal an error.
+				error = new Error(url + ' HTTP status: ' + status);
+				error.xhr = xhr;
+				done(error);
+
+				return;
+			}
+			done(null, JSON.parse(xhr.responseText));
 		}
 	};
 
@@ -55,8 +67,13 @@ define({
 
 		module.root = packagesDir + '/' + module.id;
 
-		getJSON(module.root + '/' + bower.configFile, function(meta) {
+		getJSON(module.root + '/' + bower.configFile, function(err, meta) {
 			var main;
+
+			if (err) {
+				onload.error(err);
+				return;
+			}
 
 			if (slashIdx > 0) {
 				main = name.slice(slashIdx + 1);
