@@ -45,13 +45,7 @@ function addPackage(config, pkg) {
 		config.packages = [];
 	}
 
-	config.packages.push(pkg);
-
-	// TODO: Do not rely on RequireJS internals
-	config.pkgs[pkg.name] = pkg.location;
-	if (pkg.main) {
-		config.pkgs[pkg.name] += '/' + pkg.main;
-	}
+	require.config({ context: config.context, packages: [pkg] });
 }
 
 define({
