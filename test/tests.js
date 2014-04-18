@@ -43,7 +43,7 @@ suite('bower!!', function() {
 		);
 	});
 
-	test.skip('multiple invocations', function(done) {
+	test('multiple invocations', function(done) {
 		var require = this.require;
 		require(['bower!when'], function() {
 			require(['bower!when'], function() {

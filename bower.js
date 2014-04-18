@@ -65,6 +65,11 @@ define({
 		if (slashIdx > 0) {
 			module.id = module.id.slice(0, slashIdx);
 		}
+		if (module.id.indexOf('bower_components') === 0) {
+			module.id = name.slice(slashIdx + 1, name.indexOf('/', slashIdx + 1));
+			req([module.id], onload);
+			return;
+		}
 
 		// Reference the `paths` object in the AMD configuration (if available)
 		// to allow for user specification of a custom Bower installation
