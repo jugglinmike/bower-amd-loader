@@ -47,11 +47,7 @@ function addPackage(config, pkg) {
 
 	config.packages.push(pkg);
 
-	// TODO: Do not rely on RequireJS internals
-	config.pkgs[pkg.name] = pkg.location;
-	if (pkg.main) {
-		config.pkgs[pkg.name] += '/' + pkg.main;
-	}
+	(window.require || window.curl).config(config);
 }
 
 define({

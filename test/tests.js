@@ -99,5 +99,6 @@ function testLoader(name, loaderName, url) {
 }
 
 testLoader('RequireJS', 'require', 'requirejs/require');
+testLoader('curl', 'curl', 'curl-amd/dist/curl/curl');
 
 });

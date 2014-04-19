@@ -19,6 +19,7 @@
     "chai": "^1.9.1",
     "mocha-phantomjs": "^3.3.2",
     "phantomjs": "^1.9.7-3",
-    "jshint": "^2.5.0"
+    "jshint": "^2.5.0",
+    "curl-amd": "^0.8.10"
   }
 }
